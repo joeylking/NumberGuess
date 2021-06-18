@@ -22,25 +22,18 @@ document.querySelector('.check').addEventListener('click', function () {
     message(`${number} is correct! You win! 🎉`);
     document.querySelector('body').style.backgroundColor = 'green';
     document.querySelector('.number').textContent = number;
+    document.querySelector('.number').style.width = '30rem';
     document.querySelector('.check').style.display = 'none';
     document.querySelector('.again').style.display = 'block';
     if (score > highScore) {
       highScore = score;
       document.querySelector('.highscore').textContent = highScore;
     }
-  } else if (guessValue > number) {
+  } else if (guessValue !== number) {
     if (score > 1) {
-      message("I'm thinking of a lower number...");
-      score--;
-    } else {
-      message('You lost!');
-      score--;
-      document.querySelector('.check').style.display = 'none';
-      document.querySelector('.again').style.display = 'block';
-    }
-  } else if (guessValue < number) {
-    if (score > 1) {
-      message("I'm thinking of a higher number...");
+      guessValue > number
+        ? message("I'm thinking of a lower number...")
+        : message("I'm thinking of a higher number...");
       score--;
     } else {
       message('You lost!');
@@ -55,6 +48,7 @@ document.querySelector('.check').addEventListener('click', function () {
 document.querySelector('.again').addEventListener('click', function () {
   number = numGen();
   document.querySelector('.score').textContent = 20;
+  document.querySelector('.number').style.width = '15rem';
   document.querySelector('.number').textContent = '?';
   message('Start guessing...');
   document.querySelector('.guess').value = '';
